@@ -122,3 +122,45 @@ void average_value_doub(
         old_average_value * ((count_values - 1.0) / count_values) + value_doub / count_values;
     }
 }
+
+void print_summary(
+    struct Column *columns,
+    int count_column
+) {
+    int count_int_columns = 0;
+    int count_double_columns = 0;
+    int count_other_columns = 0;
+
+    long long count_numeric_values = 0;
+    long long count_positive = 0;
+    long long count_negative = 0;
+
+    for (int ind = 0; ind < count_column; ind += 1) {
+        if (columns[ind].type == 0) {
+            count_int_columns += 1;
+        }
+        else if (columns[ind].type == 1) {
+            count_double_columns += 1;
+        }
+        else {
+            count_other_columns += 1;
+        }
+
+        if (columns[ind].type == 0 || columns[ind].type == 1) {
+            count_numeric_values += columns[ind].count_values;
+            count_positive += columns[ind].count_poz_values;
+            count_negative += columns[ind].count_neg_values;
+        }
+    }
+
+    long long count_zero = count_numeric_values
+        - count_positive - count_negative;
+
+    printf("int_columns %d\n", count_int_columns);
+    printf("double_columns %d\n", count_double_columns);
+    printf("other_columns %d\n", count_other_columns);
+    printf("numeric_values %lld\n", count_numeric_values);
+    printf("positive %lld\n", count_positive);
+    printf("negative %lld\n", count_negative);
+    printf("zeros %lld\n", count_zero);
+}

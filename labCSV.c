@@ -21,6 +21,7 @@ int main(int argc, char *argv[]) {
         else {
             printf("schema - show columns names and types\n");
             printf("stats - show columns statistics\n");
+            printf("summary - show summary for numeric columns\n");
             return 0;
         }
     }
@@ -30,7 +31,10 @@ int main(int argc, char *argv[]) {
         return 2;
     }
 
-    if (strcmp(argv[1],"schema") != 0 && strcmp(argv[1], "stats") != 0) {
+    if (strcmp(argv[1],"schema") != 0 && 
+        strcmp(argv[1], "stats") != 0 &&
+        strcmp(argv[1], "summary") != 0) {
+
         fprintf(stderr, "unknown mode\n");
         return 2;
     }
@@ -214,6 +218,10 @@ int main(int argc, char *argv[]) {
 
     printf("rows %d\n", count_line);
     printf("columns %d\n", count_column); 
+    
+    if (strcmp(argv[1], "summary") == 0) {
+        print_summary(columns, count_column);
+    }
 
     for (int ind = 0; ind < count_column; ind += 1) {
 

@@ -60,3 +60,8 @@ void average_value_doub(
     struct Column *column,
     double value_doub
 );
+
+void print_summary(
+    struct Column *columns,
+    int count_column
+);
