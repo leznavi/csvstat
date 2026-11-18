@@ -218,6 +218,10 @@ int main(int argc, char *argv[]) {
 
     printf("rows %d\n", count_line);
     printf("columns %d\n", count_column); 
+
+    if (strcmp(argv[1], "stats") == 0) {
+        printf("\n");
+    }
     
     if (strcmp(argv[1], "summary") == 0) {
         print_summary(columns, count_column);
